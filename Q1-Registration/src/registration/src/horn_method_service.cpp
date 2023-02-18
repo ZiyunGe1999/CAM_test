@@ -3,6 +3,7 @@
 #include <vector>
 #include <ros/ros.h>
 #include <registration/HornMethod.h>
+#include <registration/helper_functions.h>
 #include<Eigen/Dense>
 #include <Eigen/Geometry>
 

@@ -120,12 +120,16 @@ include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
   /usr/include/eigen3
+  include/
 )
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/registration.cpp
 # )
+add_library(helper_functions
+  src/helper_functions.cpp
+)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -154,7 +158,10 @@ add_dependencies(horn_method_service ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catki
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
-target_link_libraries(horn_method_service ${catkin_LIBRARIES})
+target_link_libraries(horn_method_service 
+${catkin_LIBRARIES}
+helper_functions
+)
 
 #############
 ## Install ##
