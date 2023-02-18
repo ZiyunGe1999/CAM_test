@@ -1,0 +1,4 @@
+string frame1_path
+string frame2_path
+---
+geometry_msgs/Pose pose
