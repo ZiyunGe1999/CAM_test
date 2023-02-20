@@ -34,7 +34,7 @@ pose:
     z: -0.7107933897989772
     w: 0.703011273626332
 ```
-## About the bonus
+## 3.About the bonus
 I noticed that you mentioned writing a subscribe callback, but it seems like you're actually working with a service instead of a topic. However, if you do need to store information outside of the callback function, you can define your callback function within a class. This way, you can store your information in member variables and access them outside of the callback function.
 
 By organizing your code in this way, you can ensure that the information you need to store persists even after the callback function has finished executing. This can be particularly useful if you need to use this information in other parts of your program.
