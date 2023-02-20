@@ -12,11 +12,28 @@ class sheetDetection:
 
     def __del__(self):
         print("Destructor for sheetDetection was called")
+    
+    def detectMarkersAndCrop(self):
+        aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_7X7_100)
+        parameters = cv2.aruco.DetectorParameters()
+        detector = cv2.aruco.ArucoDetector(aruco_dict, parameters)
+        corners, ids, _ = detector.detectMarkers(self.img1)
+        x_coords = np.array([corners[i][0][0][0] for i in range(len(corners))])
+        sort_indices = np.argsort(x_coords)
+        sorted_corners = np.array([corners[i] for i in sort_indices][-4:])
+        sorted_ids = np.array([ids[i] for i in sort_indices][-4:])
+        img_with_markers = cv2.aruco.drawDetectedMarkers(self.img1.copy(), sorted_corners, sorted_ids)
+        cv2.imwrite(f'{self.images_path}/markers_detected.jpg', img_with_markers)
+
+        x, y, w, h = cv2.boundingRect(sorted_corners.reshape(-1, 2))
+        self.img1 = self.img1[y:y+h, x:x+w]
+
 
     def load_image(self, img_file):
         print("load_image:")
         self.img_file=img_file
         self.img1= cv2.imread(os.path.join(self.captures_path, self.img_file))
+        self.detectMarkersAndCrop()
         cv2.imwrite(os.path.join(self.images_path, "1-img.jpg"), self.img1)
         self.image_size=self.img1.shape
         self.line_thickness=int(self.image_size[0]/300)
@@ -39,6 +56,7 @@ def main(input_image):
         mysheet.find_corners()
         mysheet.output_image()
         return mysheet.mycorners
+
 if __name__ == '__main__':
         input_image="71.jpg"
         output_points=main(input_image)
