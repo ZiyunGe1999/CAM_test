@@ -1,1 +1,3 @@
 pyvenv.cfg
+images/opencv_images/
+images/detected_images/output.jpg
