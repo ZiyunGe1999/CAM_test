@@ -34,6 +34,8 @@ pose:
     z: -0.7107933897989772
     w: 0.703011273626332
 ```
+Here is the screenshot:\
+![screenshot](images/transformation.png)
 ## 3.About the bonus
 I noticed that you mentioned writing a subscribe callback, but it seems like you're actually working with a service instead of a topic. However, if you do need to store information outside of the callback function, you can define your callback function within a class. This way, you can store your information in member variables and access them outside of the callback function.
 
